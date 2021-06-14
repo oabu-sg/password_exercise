@@ -14,15 +14,22 @@ def exit_function():
     exit()
     pass
 
+def check_numbers(is_num):
+    user_prompt = True
+    while user_prompt:
+        if is_num.isdigit():
+            print('Please enter a string')
+            return welcome()
+        else:
+            user_prompt = False
 
 def welcome():
     print('Welcome to the Password Hub')
-
-    first_name = str(input('Please enter your first name: '))
+    # first_name = str(input('Please enter your first name: '))
     last_name = str(input('Please enter your last name: '))
-
-    date_of_birth = input('Please enter your date of birth as DD/MM/YYYY: ')  # look this up
-    return first_name, last_name, date_of_birth, menu(first_name)
+    check_numbers(last_name)
+    #date_of_birth = input('Please enter your date of birth as DD/MM/YYYY: ')  # look this up
+    return last_name, menu(last_name)
 
 
 def menu(first_name):
