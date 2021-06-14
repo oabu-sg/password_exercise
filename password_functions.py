@@ -113,7 +113,6 @@ def user_file(file):
 
 user_file("password.txt")
 
-user_file(password.txt)
 # Start
 # Reading uses password
 # Most common checker
