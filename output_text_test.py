@@ -7,19 +7,48 @@
 #     with open("password.txt", 'a') as file:
 #         file.write(f"Password strength:{output_strength}")
 #
-# user_file("password.txt")
-import re
 import string
-# import re
-# #print("".join(a))
 Chars = list(string.printable)
 
 def strength_checker():
     user_pw = input("Enter password:\n")
+    strength_count = 0
+    def num():
+        for char in user_pw:
+            if char in Chars[0:10]:
+                return True
 
     def lower_case():
         for char in user_pw:
-            if char == Chars[0:10]:
+            if char in Chars[10:36]:
+                return True
+
+    def upper_case():
+        for char in user_pw:
+            if char in Chars[36:62]:
+                return True
+
+    def special():
+        for char in user_pw:
+            if char in Chars[62:95]:
+                return True
+
+    if num():
+        strength_count +=1
+        print('test1')
+    if lower_case():
+        strength_count +=1
+        print('test2')
+    if upper_case():
+        strength_count +=1
+        print('test3')
+    if special():
+        strength_count +=1
+        print('test4')
+
+    print(strength_count)
+
+strength_checker()
 
 
 

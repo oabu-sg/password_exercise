@@ -80,8 +80,6 @@ def PassGenerate():
         print("Please enter a number")
 
 
-
-
 def exit_function():
     print('Exiting...')
     exit()
@@ -125,10 +123,21 @@ def IsCommon(Pass):
         else:
             return False
 
-def UsersNameCheck(first_name,last_name):
-    pass
-def DoBCheck():
-    pass
+
+def UsersNameCheck(first_name, last_name, password):
+    if first_name or last_name in password:
+        return True
+    else:
+        return False
+
+
+def DoBCheck(Day, Month, Year, password):
+    if Year or Month or Day in password:
+        return True
+    else:
+        return False
+
+
 def user_file(file):
     with open("password.txt", 'a') as file:
         file.write(f"Password strength:{output_strength}\n")

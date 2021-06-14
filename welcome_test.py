@@ -25,13 +25,18 @@ def check_numbers_for_str(is_num):
         else:
             return welcome
 
-def check_numbers_for_int(is_num):
+
+def check_numbers_for_int(is_num, num_of_dob):
     user_prompt = True
-    while user_prompt:
-        if is_num.isdigit():
-            return welcome
-        else:
-            raise TypeError
+    if len(is_num) > num_of_dob:
+        raise TypeError
+    else:
+        while user_prompt:
+            if is_num.isdigit():
+                return welcome
+            else:
+                raise TypeError
+
 
 def is_empty(name):
     if name == '':
@@ -42,7 +47,6 @@ def is_empty(name):
 
 def welcome():
     print('Welcome to the Password Hub')
-    #
     user_name = True
     while user_name:
         try:
@@ -62,25 +66,26 @@ def welcome():
     user_dob = True
     while user_dob:
         try:
-            date_of_birth = input('Please enter your date of birth as DD/MM/YYYY: ')  # look this up
+           # date_of_birth = input('Please enter your date of birth as DD/MM/YYYY: ')  # look this up
             dob_day = input('Please enter the day that you were born as two numbers: ')
-            check_numbers_for_int(dob_day)
+            check_numbers_for_int(dob_day, 2)  # it  allows for numbers below the specified amount
             dob_month = input('Please enter the month that you were born as two numbers: ')
-            check_numbers_for_int(dob_month)
+            check_numbers_for_int(dob_month, 2)
             dob_year = input('Please enter the year that you were born as four numbers: ')
-            check_numbers_for_int(dob_year)
+            check_numbers_for_int(dob_year, 4)
             user_dob = False
         except TypeError:
-            print("Letters only please.")
+            print("Numbers only please. Make sure you list the specified amount of numbers")
             continue
         except EOFError:
             print("Please input something....")
             continue
 
-        #dob_day = date_of_birth[0:2]
-        dob_month = date_of_birth[3:5]
-        dob_year = date_of_birth[6:]
-        personal_details_dict = {'First Name': first_name, 'Last Name': last_name, 'DOB Day': dob_day, 'DOB Month': dob_month, 'DOB Year': dob_year}
+        # dob_day = date_of_birth[0:2]
+        # dob_month = date_of_birth[3:5]
+        # dob_year = date_of_birth[6:]
+        personal_details_dict = {'First Name': first_name, 'Last Name': last_name, 'DOB Day': dob_day,
+                                 'DOB Month': dob_month, 'DOB Year': dob_year}
 
     return personal_details_dict, menu(first_name)
 
