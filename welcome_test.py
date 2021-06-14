@@ -1,10 +1,12 @@
 def strength_checker():
     print('strength checker')
     pass
+
+
 output_strength = strength_checker()
 
 
-def password_generator():
+def PassGenerate():
     print('password generator')
     pass
 
@@ -14,22 +16,73 @@ def exit_function():
     exit()
     pass
 
-def check_numbers(is_num):
+
+def check_numbers_for_str(is_num):
     user_prompt = True
     while user_prompt:
         if is_num.isdigit():
-            print('Please enter a string')
-            return welcome()
+            raise TypeError
         else:
-            user_prompt = False
+            return welcome
+
+def check_numbers_for_int(is_num):
+    user_prompt = True
+    while user_prompt:
+        if is_num.isdigit():
+            return welcome
+        else:
+            raise TypeError
+
+def is_empty(name):
+    if name == '':
+        raise EOFError
+    else:
+        return welcome
+
 
 def welcome():
     print('Welcome to the Password Hub')
-    # first_name = str(input('Please enter your first name: '))
-    last_name = str(input('Please enter your last name: '))
-    check_numbers(last_name)
-    #date_of_birth = input('Please enter your date of birth as DD/MM/YYYY: ')  # look this up
-    return last_name, menu(last_name)
+    #
+    user_name = True
+    while user_name:
+        try:
+            first_name = input('Please enter your first name: ')
+            check_numbers_for_str(first_name)
+            is_empty(first_name)
+            last_name = input('Please enter your last name: ')
+            check_numbers_for_str(last_name)
+            is_empty(last_name)
+            user_name = False
+        except TypeError:
+            print("Letters only please.")
+            continue
+        except EOFError:
+            print("Please input something....")
+            continue
+    user_dob = True
+    while user_dob:
+        try:
+            date_of_birth = input('Please enter your date of birth as DD/MM/YYYY: ')  # look this up
+            dob_day = input('Please enter the day that you were born as two numbers: ')
+            check_numbers_for_int(dob_day)
+            dob_month = input('Please enter the month that you were born as two numbers: ')
+            check_numbers_for_int(dob_month)
+            dob_year = input('Please enter the year that you were born as four numbers: ')
+            check_numbers_for_int(dob_year)
+            user_dob = False
+        except TypeError:
+            print("Letters only please.")
+            continue
+        except EOFError:
+            print("Please input something....")
+            continue
+
+        #dob_day = date_of_birth[0:2]
+        dob_month = date_of_birth[3:5]
+        dob_year = date_of_birth[6:]
+        personal_details_dict = {'First Name': first_name, 'Last Name': last_name, 'DOB Day': dob_day, 'DOB Month': dob_month, 'DOB Year': dob_year}
+
+    return personal_details_dict, menu(first_name)
 
 
 def menu(first_name):
@@ -41,7 +94,7 @@ def menu(first_name):
         if user_action == '1':
             return strength_checker()
         elif user_action == '2':
-            return password_generator()
+            return PassGenerate()
 
         elif word_exit in user_action.lower():
             return exit_function()
@@ -49,5 +102,6 @@ def menu(first_name):
             print('Invalid input, try again')
             continue
     pass
+
 
 welcome()

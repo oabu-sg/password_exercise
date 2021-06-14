@@ -9,6 +9,7 @@ import string
 Chars = list(string.printable)
 NewPass = []
 
+
 # print(Chars[0:10]) #number
 # print(Chars[10:36]) #Lower
 # print(Chars[36:62]) #Upper
@@ -61,19 +62,24 @@ def strength_checker():
 output_strength = strength_checker()
 
 
-def password_generator(PassLen):
-    for i in range(PassLen):
-        Generate_Num = RandomNum()
-        if Generate_Num == 1:
-            NewPass.append(RandomNum())
-        elif Generate_Num == 2:
-            NewPass.append(Lower())
-        elif Generate_Num == 3:
-            NewPass.append(Upper())
-        elif Generate_Num == 4:
-            NewPass.append(Special_Char())
-    a = map(str, NewPass)
-    return "".join(a).upper()
+def PassGenerate():
+    try:
+        for i in range(int(input("What length do you want your new password to be? \n"))):
+            Generate_Num = RandomNum()
+            if Generate_Num == 1:
+                NewPass.append(RandomNum())
+            elif Generate_Num == 2:
+                NewPass.append(Lower())
+            elif Generate_Num == 3:
+                NewPass.append(Upper())
+            elif Generate_Num == 4:
+                NewPass.append(Special_Char())
+        a = map(str, NewPass)
+        print("".join(a).upper())
+    except TypeError:
+        print("Please enter a number")
+
+
 
 
 def exit_function():
@@ -101,7 +107,7 @@ def menu(first_name):
         if user_action == '1':
             return strength_checker()
         elif user_action == '2':
-            return password_generator()
+            return PassGenerate()
 
         elif word_exit in user_action.lower():
             return exit_function()
@@ -109,14 +115,24 @@ def menu(first_name):
             print('Invalid input, try again')
             continue
     pass
-# welcome()
 
+
+# welcome()
+def IsCommon(Pass):
+    with open('Passtext.txt') as File:
+        if Pass in File.read():
+            return True
+        else:
+            return False
+
+def UsersNameCheck(first_name,last_name):
+    pass
+def DoBCheck():
+    pass
 def user_file(file):
     with open("password.txt", 'a') as file:
         file.write(f"Password strength:{output_strength}\n")
-
-
-user_file("password.txt")
+    user_file("password.txt")
 
 # Start
 # Reading uses password

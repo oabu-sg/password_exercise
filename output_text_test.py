@@ -16,22 +16,29 @@ Chars = list(string.printable)
 
 def strength_checker():
     user_pw = input("Enter password:\n")
-    strength_count = 0
-    num = "|".join(Chars[0:10])
-    low = "|".join(Chars[10:36])
-    upp = "|".join(Chars[36:62])
-    spec = "|".join(Chars[62:95])
-    match_num = re.search(num)
-    match_low = re.search(low)
-    match_upp = re.search(upp)
-    match_spec = re.search(spec)
 
-    if match_low:
-        strength_count +=1
-    elif match_upp:
-        strength_count +=1
-    elif mat
-    print(strength_count)
+    def lower_case():
+        for char in user_pw:
+            if char == Chars[0:10]:
+
+
+
+    # user_pw = input("Enter password:\n")
+    # strength_count = 0
+    # low_pattern = '[a-z]'
+    # match_low = re.search(low_pattern, user_pw)
+    # upp_pattern = '[A-Z]'
+    # match_upp = re.search(upp_pattern, user_pw)
+    # num_pattern = '[0-9]'
+    # match_num = re.search(num_pattern, user_pw)
+    # spec_pattern = Chars[62:95]
+    # match_spec = re.search(spec_pattern, user_pw)
+    # if match_low:
+    #     strength_count +=1
+    # elif match_upp:
+    #     strength_count +=1
+    # elif mat
+    # print(strength_count)
     #for char in user_pw:
     # if char in Chars[0:10]:lower = ",".join(Chars[0:10])
     #     strength_count += 1
@@ -42,8 +49,14 @@ def strength_checker():
     # elif char in Chars[62:95]:
     #     strength_count += 1
 
-    print(strength_count)
-pass
-strength_checker()
+    #print(strength_count)
+#pass
+#strength_checker()
 
-    print('strength checker')
+
+# match_num = user_pw.find("0" or "1" or "2" or "3" or "4" or "5" or "6" or "7" or "8" or "9")
+# match_low = user_pw.find()
+# match_upp = re.search(
+#     "A" or "B" or "C" or "D" or "E" or "F" or "G" or "H" or "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z",
+#     user_pw)
+# match_spec = re.search()

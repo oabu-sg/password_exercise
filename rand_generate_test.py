@@ -30,17 +30,20 @@ def Special_Char():
     return Chars[randomNum]
 
 def PassGenerate():
-    for i in range(10):
-        Generate_Num = RandomNum()
-        if Generate_Num == 1:
-            NewPass.append(RandomNum())
-        elif Generate_Num == 2:
-            NewPass.append(Lower())
-        elif Generate_Num == 3:
-            NewPass.append(Upper())
-        elif Generate_Num == 4:
-            NewPass.append(Special_Char())
-    a = map(str, NewPass)
-    print("".join(a).upper())
+    try:
+        for i in range(int(input("What length do you want your new password to be? \n"))):
+            Generate_Num = RandomNum()
+            if Generate_Num == 1:
+                NewPass.append(RandomNum())
+            elif Generate_Num == 2:
+                NewPass.append(Lower())
+            elif Generate_Num == 3:
+                NewPass.append(Upper())
+            elif Generate_Num == 4:
+                NewPass.append(Special_Char())
+        a = map(str, NewPass)
+        print("".join(a).upper())
+    except:
+        print("Please enter a number")
 
 PassGenerate()
