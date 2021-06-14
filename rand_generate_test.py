@@ -40,5 +40,6 @@ while i < 5:
         NewPass.append(Upper())
     elif Generate_Num == 4:
         NewPass.append(Special_Char())
-    i += 1
-print(" ".join(str(NewPass)))
+
+a = map(str, NewPass)
+print("".join(a))
