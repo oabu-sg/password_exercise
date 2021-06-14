@@ -7,12 +7,37 @@ import string
 # Number = ["0","1","2","3","4","5","6","7","8","9"]
 
 Chars = list(string.printable)
-
+NewPass = []
 
 # print(Chars[0:10]) #number
 # print(Chars[10:36]) #Lower
 # print(Chars[36:62]) #Upper
 # print(Chars[62:95])# Special Chars
+
+def RandomNum():
+    randomNum = random.randint(1, 4)
+    return randomNum
+
+
+def RandomPass():
+    randomNum = random.randint(0, 10)
+    return Chars[randomNum]
+
+
+def Lower():
+    randomNum = random.randint(10, 36)
+    return Chars[randomNum]
+
+
+def Upper():
+    randomNum = random.randint(36, 62)
+    return Chars[randomNum]
+
+
+def Special_Char():
+    randomNum = random.randint(62, 95)
+    return Chars[randomNum]
+
 
 def strength_checker():
     user_pw = input("Enter password")
@@ -36,9 +61,19 @@ def strength_checker():
 output_strength = strength_checker()
 
 
-def password_generator():
-    print('password generator')
-    pass
+def password_generator(PassLen):
+    for i in range(PassLen):
+        Generate_Num = RandomNum()
+        if Generate_Num == 1:
+            NewPass.append(RandomNum())
+        elif Generate_Num == 2:
+            NewPass.append(Lower())
+        elif Generate_Num == 3:
+            NewPass.append(Upper())
+        elif Generate_Num == 4:
+            NewPass.append(Special_Char())
+    a = map(str, NewPass)
+    return "".join(a).upper()
 
 
 def exit_function():
@@ -74,37 +109,7 @@ def menu(first_name):
             print('Invalid input, try again')
             continue
     pass
-
-
 # welcome()
-# print(Chars[0:10]) #number
-# print(Chars[10:36]) #Lower
-# print(Chars[36:62]) #Upper
-# print(Chars[62:95])# Special Chars
-def RandomNum():
-    randomNum = random.randint(1, 4)
-    return randomNum
-
-
-def RandomPass():
-    randomNum = random.randint(0, 10)
-    return Chars[randomNum]
-
-
-def Lower():
-    randomNum = random.randint(10, 36)
-    return Chars[randomNum]
-
-
-def Upper():
-    randomNum = random.randint(36, 62)
-    return Chars[randomNum]
-
-
-def Special_Char():
-    randomNum = random.randint(62, 95)
-    return Chars[randomNum]
-
 
 def user_file(file):
     with open("password.txt", 'a') as file:

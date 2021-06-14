@@ -29,17 +29,18 @@ def Special_Char():
     randomNum = random.randint(62, 95)
     return Chars[randomNum]
 
-i = 0
-while i < 5:
-    Generate_Num = RandomNum()
-    if Generate_Num == 1:
-        NewPass.append(RandomNum())
-    elif Generate_Num == 2:
-        NewPass.append(Lower())
-    elif Generate_Num == 3:
-        NewPass.append(Upper())
-    elif Generate_Num == 4:
-        NewPass.append(Special_Char())
+def PassGenerate():
+    for i in range(10):
+        Generate_Num = RandomNum()
+        if Generate_Num == 1:
+            NewPass.append(RandomNum())
+        elif Generate_Num == 2:
+            NewPass.append(Lower())
+        elif Generate_Num == 3:
+            NewPass.append(Upper())
+        elif Generate_Num == 4:
+            NewPass.append(Special_Char())
+    a = map(str, NewPass)
+    print("".join(a).upper())
 
-a = map(str, NewPass)
-print("".join(a))
+PassGenerate()
