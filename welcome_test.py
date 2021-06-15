@@ -28,7 +28,7 @@ def check_numbers_for_str(is_num):
 
 def check_numbers_for_int(is_num, num_of_dob):
     user_prompt = True
-    if len(is_num) > num_of_dob:
+    if len(is_num) != num_of_dob:
         raise TypeError
     else:
         while user_prompt:
@@ -66,7 +66,6 @@ def welcome():
     user_dob = True
     while user_dob:
         try:
-           # date_of_birth = input('Please enter your date of birth as DD/MM/YYYY: ')  # look this up
             dob_day = input('Please enter the day that you were born as two numbers: ')
             check_numbers_for_int(dob_day, 2)  # it  allows for numbers below the specified amount
             dob_month = input('Please enter the month that you were born as two numbers: ')
@@ -93,7 +92,7 @@ def welcome():
 def menu(first_name):
     word_exit = 'exit'
     running = True
-    print(f'Hello {first_name}, enter the corresponding value for what you would like todo:')
+    print(f'\nHello {first_name}, enter the corresponding value for what you would like todo:')
     while running:
         user_action = input('Check password strength (1), generate a password (2) or type "exit" to exit.')
         if user_action == '1':
@@ -106,7 +105,6 @@ def menu(first_name):
         else:
             print('Invalid input, try again')
             continue
-    pass
 
 
 welcome()

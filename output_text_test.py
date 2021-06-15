@@ -1,54 +1,14 @@
-# def strength_checker():
-#     print('strength checker')
-#
-# output_strength = stength_checker()
-#
-# def user_file(file):
-#     with open("password.txt", 'a') as file:
-#         file.write(f"Password strength:{output_strength}")
-#
-import string
-Chars = list(string.printable)
-
 def strength_checker():
-    user_pw = input("Enter password:\n")
-    strength_count = 0
-    def num():
-        for char in user_pw:
-            if char in Chars[0:10]:
-                return True
+    print('strength checker')
 
-    def lower_case():
-        for char in user_pw:
-            if char in Chars[10:36]:
-                return True
+output_strength = stength_checker()
 
-    def upper_case():
-        for char in user_pw:
-            if char in Chars[36:62]:
-                return True
+def user_file(file):
+    with open("password.txt", 'a') as file:
+        file.write(f"Password strength:{output_strength}")
 
-    def special():
-        for char in user_pw:
-            if char in Chars[62:95]:
-                return True
 
-    if num():
-        strength_count +=1
-        print('test1')
-    if lower_case():
-        strength_count +=1
-        print('test2')
-    if upper_case():
-        strength_count +=1
-        print('test3')
-    if special():
-        strength_count +=1
-        print('test4')
 
-    print(strength_count)
-
-strength_checker()
 
 
 

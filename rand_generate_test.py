@@ -1,9 +1,15 @@
 import string
 import random
-
+from random import shuffle
 Chars = list(string.printable)
 NewPass = []
 
+Policy = {
+   "Upper": 0,
+    "Lower": 4,
+    "Special": 3,
+    "Number": 6
+}
 
 def RandomNum():
     randomNum = random.randint(1, 4)
@@ -30,20 +36,31 @@ def Special_Char():
     return Chars[randomNum]
 
 def PassGenerate():
-    try:
-        for i in range(int(input("What length do you want your new password to be? \n"))):
-            Generate_Num = RandomNum()
-            if Generate_Num == 1:
-                NewPass.append(RandomNum())
-            elif Generate_Num == 2:
-                NewPass.append(Lower())
-            elif Generate_Num == 3:
-                NewPass.append(Upper())
-            elif Generate_Num == 4:
-                NewPass.append(Special_Char())
-        a = map(str, NewPass)
-        print("".join(a).upper())
-    except:
-        print("Please enter a number")
+
+    #Generate_Num = RandomNum()
+    policy_length = 0
+    while policy_length < Policy['Number']:
+        NewPass.append(RandomNum())
+        policy_length += 1
+    policy_length = 0
+    while policy_length < Policy['Lower']:
+       NewPass.append(Lower())
+       policy_length += 1
+    policy_length = 0
+    while policy_length < Policy['Upper']:
+        NewPass.append(Upper())
+        policy_length += 1
+    policy_length = 0
+    while policy_length < Policy['Special']:
+       NewPass.append(Special_Char())
+       policy_length += 1
+    policy_length = 0
+    a = map(str, NewPass)
+    JointPass ="".join(a)
+    ListPass = list(JointPass)
+    shuffle(ListPass)
+    FinalString = "".join(ListPass)
+    print(NewPass)
+    print(FinalString)
 
 PassGenerate()
