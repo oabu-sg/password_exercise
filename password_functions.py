@@ -1,12 +1,13 @@
-# welcome function, collects personal data and what they want to do
+    # welcome function, collects personal data and what they want to do
 import random
 import string
 import time
 
-# Upper = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","z"]
-# Lower= ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u", "v", "w", "x", "y", "z"]
-# Number = ["0","1","2","3","4","5","6","7","8","9"]
+    # Upper = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","z"]
+    # Lower= ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u", "v", "w", "x", "y", "z"]
+    # Number = ["0","1","2","3","4","5","6","7","8","9"]
 
+#class Password_program:
 Policy = {
     "Upper": 2,
     "Lower": 4,
@@ -61,7 +62,6 @@ def welcome():
             continue
         personal_details_dict = {'First Name': first_name, 'Last Name': last_name, 'DOB Day': dob_day,
                                  'DOB Month': dob_month, 'DOB Year': dob_year}
-
     return personal_details_dict, menu(first_name)
 
 
@@ -87,15 +87,6 @@ def menu(first_name):
             print('Invalid input, try again')
             continue
 
-
-# print(Chars[0:10]) #number
-# print(Chars[10:36]) #Lower
-# print(Chars[36:62]) #Upper
-# print(Chars[62:95])# Special Chars
-
-def RandomNum():
-    randomNum = random.randint(1, 4)
-    return randomNum
 
 
 def RandomPass():
@@ -132,7 +123,7 @@ def strength_checker():
                 return True
             else:
                 print("Password does not contain enough numbers")
-                file.write("Password didn't contain enough numbers")
+                file.write("Password didn't contain enough numbers\n")
     def lower_case():
         with open("password.txt", 'a') as file:
             num_counter = 0
@@ -143,7 +134,7 @@ def strength_checker():
                 return True
             else:
                 print("Password does not contain enough lowercase letters")
-                file.write("Password didn't contain enough lowercase letters")
+                file.write("Password didn't contain enough lowercase letters\n")
     def upper_case():
         with open("password.txt", 'a') as file:
             num_counter = 0
@@ -177,10 +168,10 @@ def strength_checker():
 
     def user_file():
         with open("password.txt", 'a') as file:
-            file.write('\nPassword Policies:\n')
+            file.write('\nPassword Policy:\n')
             for key, value in Policy.items():
                 file.write(key + ':' + str(value)+'\n')
-            file.write('\nPassword Strengths\n')
+            file.write('\nPassword Strengths:\n')
             for key, value in password_strength_string.items():
                 file.write(key + ':' + str(value)+'\n')
             file.write(
@@ -217,7 +208,7 @@ def strength_checker():
     if strength_count == 5:
         return strength_count, menu(first_name)
     else:
-        print("You are being directed to the get a new password")
+        print("\nYou are being directed to the get a new password")
         user_file()
         time.sleep(5)
         pass_generate()
@@ -231,7 +222,7 @@ def pass_generate():
     policy_length = 0
     NewPass = []
     while policy_length < Policy['Number']:
-        NewPass.append(RandomNum())
+        NewPass.append(RandomPass())
         policy_length += 1
     policy_length = 0
     while policy_length < Policy['Lower']:
@@ -254,7 +245,7 @@ def pass_generate():
     print(f"This is your new randomly generated password: {FinalString}")
     user_file(FinalString)
 
-    print("You are being directed back to the main menu")
+    print("\nYou are being directed back to the main menu")
     time.sleep(3)
     menu(first_name)
 
