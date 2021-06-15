@@ -69,7 +69,7 @@ def strength_checker():
 output_strength = strength_checker()
 
 
-def PassGenerate():
+def pass_Generate():
     try:
         for i in range(int(input("What length do you want your new password to be? \n"))):
             Generate_Num = RandomNum()
@@ -112,7 +112,7 @@ def menu(first_name):
         if user_action == '1':
             return strength_checker()
         elif user_action == '2':
-            return PassGenerate()
+            return pass_Generate()
 
         elif word_exit in user_action.lower():
             return exit_function()
@@ -122,8 +122,7 @@ def menu(first_name):
     pass
 
 
-# welcome()
-def IsCommon(Pass):
+def is_Common(Pass):
     with open('Passtext.txt') as File:
         if Pass in File.read():
             return True
@@ -131,14 +130,14 @@ def IsCommon(Pass):
             return False
 
 
-def UsersNameCheck(first_name, last_name, password):
-    if first_name or last_name in password:
+def users_name_check(first_name, last_name, password):
+    if first_name.lower() or last_name.lower() in password.lower():
         return True
     else:
         return False
 
 
-def DoBCheck(Day, Month, Year, password):
+def DoB_check(Day, Month, Year, password):
     if Year or Month or Day in password:
         return True
     else:

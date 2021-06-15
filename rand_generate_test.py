@@ -5,7 +5,7 @@ Chars = list(string.printable)
 NewPass = []
 
 Policy = {
-   "Upper": 0,
+   "Upper": 3,
     "Lower": 4,
     "Special": 3,
     "Number": 6

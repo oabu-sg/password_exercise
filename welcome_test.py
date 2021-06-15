@@ -1,3 +1,10 @@
+Policy = {
+   "Upper": 2,
+    "Lower": 4,
+    "Special": 1,
+    "Number": 1
+}
+
 def strength_checker():
     print('strength checker')
     pass
@@ -79,10 +86,6 @@ def welcome():
         except EOFError:
             print("Please input something....")
             continue
-
-        # dob_day = date_of_birth[0:2]
-        # dob_month = date_of_birth[3:5]
-        # dob_year = date_of_birth[6:]
         personal_details_dict = {'First Name': first_name, 'Last Name': last_name, 'DOB Day': dob_day,
                                  'DOB Month': dob_month, 'DOB Year': dob_year}
 
@@ -92,7 +95,10 @@ def welcome():
 def menu(first_name):
     word_exit = 'exit'
     running = True
-    print(f'\nHello {first_name}, enter the corresponding value for what you would like todo:')
+    print(f'\nHello {first_name.capitalize()}, this is the password policy:')
+    for key, value in Policy.items():
+        print(key, ':', value)
+    print("Please enter the corresponding value for what you would like todo:")
     while running:
         user_action = input('Check password strength (1), generate a password (2) or type "exit" to exit.')
         if user_action == '1':
