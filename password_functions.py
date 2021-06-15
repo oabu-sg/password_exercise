@@ -23,6 +23,8 @@ NewPass = []
 
 
 def welcome():
+    with open("password.txt", 'w') as file:
+        file.write('')
     global first_name, last_name, personal_details_dict
     print('Welcome to the Password Hub')
     user_name = True
@@ -121,61 +123,68 @@ def strength_checker():
     strength_count = 0
 
     def num():
-        num_counter = 0
-        for char in user_pw:
-            if char in Chars[0:10]:
-                num_counter += 1
-        if num_counter >= Policy["Number"]:
-            return True
-        else:
-            print("Password does not contain enough numbers")
-
+        with open("password.txt", 'a') as file:
+            num_counter = 0
+            for char in user_pw:
+                if char in Chars[0:10]:
+                    num_counter += 1
+            if num_counter >= Policy["Number"]:
+                return True
+            else:
+                print("Password does not contain enough numbers")
+                file.write("Password didn't contain enough numbers")
     def lower_case():
-        num_counter = 0
-        for char in user_pw:
-            if char in Chars[10:36]:
-                num_counter += 1
-        if num_counter >= Policy["Lower"]:
-            return True
-        else:
-            print("Password does not contain enough lowercase letters")
-
+        with open("password.txt", 'a') as file:
+            num_counter = 0
+            for char in user_pw:
+                if char in Chars[10:36]:
+                    num_counter += 1
+            if num_counter >= Policy["Lower"]:
+                return True
+            else:
+                print("Password does not contain enough lowercase letters")
+                file.write("Password didn't contain enough lowercase letters")
     def upper_case():
-        num_counter = 0
-        for char in user_pw:
-            if char in Chars[36:62]:
-                num_counter += 1
-        if num_counter >= Policy["Upper"]:
-            return True
-        else:
-            print("Password does not contain enough uppercase letters")
-
+        with open("password.txt", 'a') as file:
+            num_counter = 0
+            for char in user_pw:
+                if char in Chars[36:62]:
+                    num_counter += 1
+            if num_counter >= Policy["Upper"]:
+                return True
+            else:
+                print("Password does not contain enough uppercase letters")
+                file.write("Password didn't contain enough uppercase letters\n")
     def special():
-        num_counter = 0
-        for char in user_pw:
-            if char in Chars[62:95]:
-                num_counter += 1
-        if num_counter >= Policy["Special"]:
-            return True
-        else:
-            print("Password does not contain enough special characters")
+        with open("password.txt", 'a') as file:
+            num_counter = 0
+            for char in user_pw:
+                if char in Chars[62:95]:
+                    num_counter += 1
+            if num_counter >= Policy["Special"]:
+                return True
+            else:
+                print("Password does not contain enough special characters")
+                file.write("Password didn't contain enough special characters\n")
 
     def pw_length():
-        if len(user_pw) >= sum(Policy.values()):
-            return True
-        else:
-            print('Password is too short')
+        with open("password.txt", 'a') as file:
+            if len(user_pw) >= sum(Policy.values()):
+                return True
+            else:
+                print('Password is too short')
+                file.write('Password was too short')
 
     def user_file():
         with open("password.txt", 'a') as file:
             file.write('\nPassword Policies:\n')
             for key, value in Policy.items():
-                file.write(key + ':' + str(value))
+                file.write(key + ':' + str(value)+'\n')
             file.write('\nPassword Strengths\n')
             for key, value in password_strength_string.items():
-                file.write(key + ':' + str(value))
+                file.write(key + ':' + str(value)+'\n')
             file.write(
-                f"\nUser Name: {personal_details_dict['First Name'], personal_details_dict['Last Name']}.\nEach of the policy requirements count as one point.\nIf your password contains any of your personal details (first name, last name, DOB), the strength is set to 0.\nPassword strength:{strength_count} which is {pw_str}.")
+                f"\nUser Name: {str(personal_details_dict['First Name']).capitalize()} {str(personal_details_dict['Last Name']).capitalize()}.\nEach of the policy requirements and the sum of the characters (minimum length) in the policy count as one point.\nIf your password contains any of your personal details (first name, last name, DOB), the strength is set to 0.\nPassword strength:{strength_count} which is {pw_str}.\n")
 
     if num():
         strength_count += 1
@@ -187,16 +196,17 @@ def strength_checker():
         strength_count += 1
     if pw_length():
         strength_count += 1
-    if is_Common(user_pw) or users_name_check(personal_details_dict['First Name'], personal_details_dict['Last Name'],
-                                              user_pw) or DoB_check(personal_details_dict['DOB Day'],
+    if is_Common(user_pw) or users_name_check(personal_details_dict['First Name'], personal_details_dict['Last Name'],user_pw) or DoB_check(personal_details_dict['DOB Day'],
                                                                     personal_details_dict['DOB Month'],
                                                                     personal_details_dict['DOB Year'], user_pw):
-        print("Password cannot contain your personal details.")
+        print("Password cannot contain your personal details or be a commonly used password.")
+        with open("password.txt", 'a') as file:
+            file.write("Password contained your personal details or was a commonly used password.")
         strength_count = 0
 
     if strength_count == 5:
         pw_str = "strong"
-    elif strength_count == range(3, 5):
+    elif strength_count in range(3, 5):
         pw_str = "medium"
     else:
         pw_str = "weak"
@@ -209,15 +219,13 @@ def strength_checker():
     else:
         print("You are being directed to the get a new password")
         user_file()
-        time.sleep(2)
+        time.sleep(5)
         pass_generate()
 
 
 def pass_generate():
     def user_file(FinalString):
-        with open("password.txt", 'r+') as file:
-            for key, value in Policy.items():
-                file.write(key + ':' + str(value))
+        with open("password.txt", 'a') as file:
             file.write(f"This is your new randomly generated password: {FinalString}")
 
     policy_length = 0
@@ -255,6 +263,7 @@ def exit_function():
     export_file = open('password.txt', 'r')
     print(export_file.read())
     print('Exiting...')
+
     exit()
     pass
 
@@ -290,20 +299,30 @@ def is_empty(name):
 def is_Common(Pass):
     with open('Passtext.txt') as File:
         if Pass in File.read():
+            print('is common is true')
             return True
         else:
             return False
 
 
 def users_name_check(first_name, last_name, password):
-    if first_name.lower() or last_name.lower() in password.lower():
+    if first_name.lower() in password.lower():
+        return True
+    elif last_name.lower() in password.lower():
         return True
     else:
         return False
 
 
 def DoB_check(Day, Month, Year, password):
-    if Year or Month or Day in password:
+    if Day in password:
+        print('DOB Day is true')
+        return True
+    elif Month in password:
+        print('DOB month is true')
+        return True
+    elif Year in password:
+        print('DOB year is true')
         return True
     else:
         return False
