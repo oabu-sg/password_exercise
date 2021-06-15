@@ -2,6 +2,7 @@
 import random
 import string
 import time
+
 # Upper = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","z"]
 # Lower= ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u", "v", "w", "x", "y", "z"]
 # Number = ["0","1","2","3","4","5","6","7","8","9"]
@@ -12,7 +13,11 @@ Policy = {
     "Special": 1,
     "Number": 1
 }
-
+password_strength_string = {
+    "Strong": '5',
+    "Medium": "3-4",
+    "Weak": "0-2"
+}
 Chars = list(string.printable)
 NewPass = []
 
@@ -161,11 +166,16 @@ def strength_checker():
         else:
             print('Password is too short')
 
-    def user_file(file):
+    def user_file():
         with open("password.txt", 'a') as file:
+            file.write('\nPassword Policies:\n')
             for key, value in Policy.items():
                 file.write(key + ':' + str(value))
-            file.write(f"Each of the policy requirements count as one point.\nIf\nPassword strength:{strength_count} which is {pw_str}")
+            file.write('\nPassword Strengths\n')
+            for key, value in password_strength_string.items():
+                file.write(key + ':' + str(value))
+            file.write(
+                f"\nUser Name: {personal_details_dict['First Name'], personal_details_dict['Last Name']}.\nEach of the policy requirements count as one point.\nIf your password contains any of your personal details (first name, last name, DOB), the strength is set to 0.\nPassword strength:{strength_count} which is {pw_str}.")
 
     if num():
         strength_count += 1
@@ -181,6 +191,7 @@ def strength_checker():
                                               user_pw) or DoB_check(personal_details_dict['DOB Day'],
                                                                     personal_details_dict['DOB Month'],
                                                                     personal_details_dict['DOB Year'], user_pw):
+        print("Password cannot contain your personal details.")
         strength_count = 0
 
     if strength_count == 5:
@@ -190,14 +201,27 @@ def strength_checker():
     else:
         pw_str = "weak"
 
-    print(f"The strength of your password is: {strength_count}/5, which is {pw_str}")
-    return strength_count, menu(first_name)
 
+    print(f"The strength of your password is: {strength_count}/5, which is {pw_str}")
+
+    if strength_count == 5:
+        return strength_count, menu(first_name)
+    else:
+        print("You are being directed to the get a new password")
+        user_file()
+        time.sleep(2)
+        pass_generate()
 
 
 def pass_generate():
+    def user_file(FinalString):
+        with open("password.txt", 'r+') as file:
+            for key, value in Policy.items():
+                file.write(key + ':' + str(value))
+            file.write(f"This is your new randomly generated password: {FinalString}")
+
     policy_length = 0
-    NewPass =[]
+    NewPass = []
     while policy_length < Policy['Number']:
         NewPass.append(RandomNum())
         policy_length += 1
@@ -219,14 +243,17 @@ def pass_generate():
     ListPass = list(JointPass)
     random.shuffle(ListPass)
     FinalString = "".join(ListPass)
-    print(NewPass)
-    print(FinalString)
-    time.sleep(10)
+    print(f"This is your new randomly generated password: {FinalString}")
+    user_file(FinalString)
+
+    print("You are being directed back to the main menu")
+    time.sleep(3)
     menu(first_name)
 
 
 def exit_function():
-    strength_checker.user_file()
+    export_file = open('password.txt', 'r')
+    print(export_file.read())
     print('Exiting...')
     exit()
     pass
