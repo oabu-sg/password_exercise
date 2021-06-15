@@ -64,6 +64,8 @@ def strength_checker():
                 num_counter += 1
         if num_counter >= Policy["Upper"]:
             return True
+        else:
+            print("Password does not contain enough uppercase letters")
 
     def special():
         num_counter = 0
@@ -72,7 +74,8 @@ def strength_checker():
                 num_counter += 1
         if num_counter >= Policy["Special"]:
             return True
-
+        else:
+            print("Password does not contain enough special characters")
     def pw_length():
         if len(user_pw) >= sum(Policy.values()):
             return True
@@ -92,7 +95,16 @@ def strength_checker():
         strength_count += 1
     if is_Common(user_pw) or users_name_check("Jaydee", "Gbobeh", user_pw) or DoB_check("29", "08", "1997", user_pw):
         strength_count = 0
-    print(strength_count)
+
+    if strength_count == 5:
+        pw_str = "strong"
+    elif strength_count == range(3, 5):
+        pw_str = "medium"
+    else:
+        pw_str = "weak"
+
+    print(f"The strength of your password is: {strength_count}/5, which is {pw_str}")
+    return strength_count
 
 
 strength_checker()

@@ -1,7 +1,7 @@
-def strength_checker():
-    print('strength checker')
-
-output_strength = stength_checker()
+# def strength_checker():
+#     print('strength checker')
+#
+# output_strength = stength_checker()
 
 def user_file(file):
     with open("password.txt", 'a') as file:
