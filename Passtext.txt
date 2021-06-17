@@ -28,3 +28,4 @@ freedom
 whatever
 qazwsx
 trustno1
+password123456
