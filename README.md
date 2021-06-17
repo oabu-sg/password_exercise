@@ -25,3 +25,5 @@ Project Tasks:
   - Check it against the password's policy and the most common password list.
   - Check the existence of user's information (first name, last name, birthdate, etc) in the password.
   - Show the generated password and ask the user whether to generate another password using same user's information
+
+# this is a test to see if git will sync with other users
